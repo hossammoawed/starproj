@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{__('auth.Laravel')}}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -64,35 +64,48 @@
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
+
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">{{__('auth.Home')}}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">{{__('auth.Login')}}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">{{__('auth.Register')}}</a>
                         @endif
                     @endauth
+                        <ul>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <li>
+                                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                 </div>
+
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{__('auth.Laravel')}}
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs">{{__('auth.Docs')}}</a>
+                    <a href="https://laracasts.com">{{__('auth.Laracasts')}}</a>
+                    <a href="https://laravel-news.com">{{__('auth.News')}}</a>
+                    <a href="https://blog.laravel.com">{{__('auth.Blog')}}</a>
+                    <a href="https://nova.laravel.com">{{__('auth.Nova')}}</a>
+                    <a href="https://forge.laravel.com">{{__('auth.Forge')}}</a>
+                    <a href="https://vapor.laravel.com">{{__('auth.Vapor')}}</a>
+                    <a href="https://github.com/laravel/laravel">{{__('auth.GitHub')}}</a>
+
                 </div>
             </div>
         </div>
